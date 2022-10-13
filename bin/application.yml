@@ -1,0 +1,201 @@
+---
+grails:
+    profile: web
+    codegen:
+        defaultPackage: au.org.ala.bie
+    spring:
+        transactionManagement:
+            proxies: false
+    gorm:
+        # Whether to autowire entities. 
+        # Disabled by default for performance reasons.
+        autowire: false         
+        reactor:
+            # Whether to translate GORM events into Reactor events
+            # Disabled by default for performance reasons
+            events: false
+info:
+    app:
+        name: '@info.app.name@'
+        version: '@info.app.version@'
+        grailsVersion: '@info.app.grailsVersion@'
+spring:
+    main:
+        banner-mode: "off"
+    groovy:
+        template:
+            check-template-location: false
+
+# Spring Actuator Endpoints are Disabled by Default
+endpoints:
+    enabled: true
+    jmx:
+        enabled: true
+
+---
+grails:
+    config:
+        locations:
+            - file:///data/ala-bie/config/ala-bie-config.properties
+            - file:///data/ala-bie/config/ala-bie-config.yml
+            - file:///data/ala-bie/config/ala-bie-config.groovy
+    cors:
+        enabled: true
+    mime:
+        disable:
+            accept:
+                header:
+                    userAgents:
+                        - Gecko
+                        - WebKit
+                        - Presto
+                        - Trident
+        types:
+            all: '*/*'
+            atom: application/atom+xml
+            css: text/css
+            csv: text/csv
+            form: application/x-www-form-urlencoded
+            html:
+              - text/html
+              - application/xhtml+xml
+            js: text/javascript
+            json:
+              - application/json
+              - text/json
+            multipartForm: multipart/form-data
+            pdf: application/pdf
+            rss: application/rss+xml
+            text: text/plain
+            hal:
+              - application/hal+json
+              - application/hal+xml
+            xml:
+              - text/xml
+              - application/xml
+    urlmapping:
+        cache:
+            maxsize: 1000
+    controllers:
+        defaultScope: singleton
+    converters:
+        encoding: UTF-8
+    views:
+        default:
+            codec: html
+        gsp:
+            encoding: UTF-8
+            htmlcodec: xml
+            codecs:
+                expression: html
+                scriptlets: html
+                taglib: none
+                staticparts: none
+endpoints:
+    jmx:
+        unique-names: true
+---
+#Required so that the gbif-ecat library does not bugger up initialisation from its internal application.properties
+app:
+  name: ala-bie
+  dataDir: /tmp/gbif-ecat
+security:
+  cas:
+    applyUriFiltersToTicketValidation: false
+skin:
+  layout: ala
+  orgNameLong: Atlas of Living Australia
+  orgNameShort: ALA
+  logoFile: ALA-logo-300x271.png
+  fluidLayout: false
+facebook:
+  app_id: 291639771683619
+bie:
+  baseURL: http://localhost:8080
+  searchPath: /search
+  index:
+    url: http://localhost:8090/bie-index
+facets: idxtype,rank,speciesGroup,locatedInHubCountry,imageAvailable,conservationStatusAUS_s,conservationStatusACT_s,conservationStatusNSW_s,conservationStatusQLD_s,conservationStatusVIC_s,conservationStatusTAS_s,conservationStatusSA_s,conservationStatusWA_s,conservationStatusNT_s
+speciesParent: https://lists.ala.org.au/iconic-species
+serverName: http://dev.ala.org.au:8080
+projectNameShort: Atlas
+projectName: Atlas of Living Australia
+biocache:
+    baseURL: "https://biocache.ala.org.au"
+biocacheService:
+    baseURL: https://biocache-ws.ala.org.au/ws
+    queryContext:
+spatial:
+    baseURL: https://spatial.ala.org.au
+layersService:
+    baseURL: https://spatial.ala.org.au/ws
+ala:
+    baseURL: https://www.ala.org.au
+collectory:
+    baseURL: https://collections.ala.org.au
+    threatenedSpeciesCodesUrl: https://collections.ala.org.au/public/showDataResource
+regions:
+    baseURL: https://regions.ala.org.au
+bhl:
+    baseURL: https://www.biodiversitylibrary.org
+speciesList:
+    baseURL: https://lists.ala.org.au
+    preferredSpeciesListDruid:
+    preferredListName: ALA Preferred Species Images
+    apiKey:
+alerts:
+    baseUrl: https://alerts.ala.org.au/ws/
+sightings:
+    url: https://www.ala.org.au/home/record-a-sighting/
+eol:
+    lang: en
+defaultDecimalLatitude: -25.61
+defaultDecimalLongitude: 134.35
+defaultZoomLevel: 4
+image:
+    thumbnailUrl: https://images.ala.org.au/image/proxyImageThumbnail?imageId=
+map:
+    default:
+        id:
+        token:
+        url: https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png
+        attr: Map data &copy; <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap</a>, imagery &copy; <a href='https://cartodb.com/attributions'>CartoDB</a>
+        domain: abcd
+        colour: e6704c
+    simpleMapButton: false
+    records:
+      colour: e6704c
+bieService:
+  baseUrl: https://bie-ws.ala.org.au/ws
+  queryContext:
+  apiKey:
+googleMapsApiKey: AIzaSyB0HIkSCV2EdkG50uM7s96IEbO6wUHTqy0
+languageCodesUrl: file:///data/ala-bie/config/languages.json
+geocode.querySuffix:
+occurrenceCounts:
+    enabled: true
+additionalResultsFields: kingdom
+admin_role: ROLE_ADMIN
+allowedImageEditingRoles: ROLE_ADMIN
+additionalMapFilter:
+synonymsTypes: synonym
+literature:
+    bhl:
+        url: https://www.biodiversitylibrary.org
+        api: https://www.biodiversitylibrary.org/api3
+        apikey: "<key value>"
+    genbank:
+        url: https://www.ncbi.nlm.nih.gov
+    scholar:
+        url: https://scholar.google.com.au
+    google:
+      url: https://www.google.com.au
+    trove:
+      url: https://trove.nla.gov.au
+      api: https://api.trove.nla.gov.au
+      apikey: "<key value>"
+show:
+    tabs: overview,gallery,names,classification,records,literature,sequences,data-partners
+
+headerAndFooter:
+  version: "1"
